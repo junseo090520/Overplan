@@ -1,0 +1,1101 @@
+/* =========================
+   기본 설정
+========================= */
+
+* {
+    box-sizing: border-box;
+}
+
+:root {
+    --primary: #347cf5;
+    --navy: #142342;
+    --text: #344766;
+    --muted: #8290a9;
+    --border: #edf1f7;
+    --pink: #ff7185;
+    --green: #2eb477;
+    --purple: #9a59ee;
+}
+
+body {
+    margin: 0;
+    background: #f4f7fc;
+    color: var(--navy);
+    font-family: "Noto Sans KR", sans-serif;
+    font-size: 14px;
+}
+
+button, input, select {
+    font: inherit;
+}
+
+button {
+    cursor: pointer;
+}
+
+a {
+    color: inherit;
+    text-decoration: none;
+}
+
+
+/* =========================
+   상단 네비게이션
+========================= */
+
+.header {
+    height: 72px;
+    padding: 0 2.8%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background: white;
+    border-bottom: 1px solid var(--border);
+    gap: 25px;
+}
+
+.logo {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    font-size: 29px;
+    font-weight: 800;
+    letter-spacing: -1px;
+    white-space: nowrap;
+}
+
+.logo-icon {
+    width: 35px;
+    height: 35px;
+    display: grid;
+    place-items: center;
+    border-radius: 11px;
+    background: linear-gradient(135deg, #7bb5ff, #1765ec);
+    color: white;
+    font-size: 22px;
+}
+
+.nav {
+    height: 100%;
+    display: flex;
+    align-items: stretch;
+    gap: 38px;
+}
+
+.nav a {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    position: relative;
+    color: #50617f;
+    font-size: 16px;
+    white-space: nowrap;
+}
+
+.nav a.active {
+    color: var(--primary);
+    font-weight: 700;
+}
+
+.nav a.active::after {
+    content: "";
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 3px;
+    border-radius: 5px 5px 0 0;
+    background: var(--primary);
+}
+
+.header-right {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+
+.search-box {
+    width: 290px;
+    height: 42px;
+    padding: 0 15px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    border-radius: 25px;
+    background: #f2f5fa;
+    color: #60718f;
+    font-size: 25px;
+}
+
+.search-box input {
+    width: 100%;
+    border: none;
+    outline: none;
+    background: transparent;
+    font-size: 12px;
+}
+
+.search-box input::placeholder {
+    color: #a1adc1;
+}
+
+.notification {
+    position: relative;
+    border: none;
+    background: transparent;
+    color: #435675;
+    font-size: 25px;
+}
+
+.notification span {
+    position: absolute;
+    top: 2px;
+    right: 0;
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: #ff6e7d;
+}
+
+.profile {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-weight: 600;
+    white-space: nowrap;
+}
+
+.profile img {
+    width: 39px;
+    height: 39px;
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+
+/* =========================
+   메인 배너
+========================= */
+
+.main-container {
+    max-width: 1800px;
+    margin: 0 auto;
+}
+
+.hero {
+    min-height: 177px;
+    padding: 30px 2.8%;
+    margin-bottom: 14px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    position: relative;
+    overflow: hidden;
+
+    background:
+        linear-gradient(
+            90deg,
+            rgba(248, 251, 255, .98),
+            rgba(235, 244, 255, .85),
+            rgba(221, 235, 255, .75),
+            rgba(244, 248, 255, .95)
+        ),
+        url("../assets/images/mountain.jpg") center / cover;
+}
+
+.hero-content {
+    position: relative;
+    z-index: 1;
+}
+
+.hero-label {
+    margin: 0 0 10px;
+    color: #4e8cff;
+    font-size: 15px;
+    font-weight: 700;
+    letter-spacing: .7px;
+}
+
+.hero h1 {
+    margin: 0;
+    font-size: clamp(26px, 2.45vw, 38px);
+    font-weight: 800;
+    letter-spacing: -1.5px;
+}
+
+.hero h1 span {
+    color: var(--primary);
+}
+
+.hero-description {
+    margin: 7px 0 0;
+    color: #536789;
+    font-size: 18px;
+}
+
+.hero-script {
+    position: absolute;
+    left: 64%;
+    top: 18px;
+    color: #5f94ee;
+    font: italic 24px/1.05 cursive;
+    transform: rotate(-10deg);
+}
+
+.hero-quote {
+    z-index: 1;
+    width: 333px;
+    margin: 0;
+    padding: 25px 32px;
+    border-radius: 17px;
+    background: rgba(255, 255, 255, .9);
+    text-align: center;
+}
+
+.hero-quote p {
+    margin: 0 0 13px;
+    font-size: 17px;
+    font-weight: 600;
+    line-height: 1.65;
+}
+
+.hero-quote span {
+    color: #7484a1;
+}
+
+
+/* =========================
+   대시보드 레이아웃
+========================= */
+
+.dashboard {
+    padding: 0 20px 24px;
+    display: grid;
+    grid-template-columns:
+        minmax(285px, 1.02fr)
+        minmax(540px, 2.05fr)
+        minmax(300px, 1.02fr);
+    gap: 16px;
+    align-items: stretch;
+}
+
+.left-section,
+.right-section {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+    min-width: 0;
+}
+
+.card {
+    border: 1px solid var(--border);
+    border-radius: 17px;
+    background: white;
+    box-shadow: 0 8px 28px rgba(31, 69, 124, .035);
+}
+
+
+/* =========================
+   날짜 및 인사
+========================= */
+
+.greeting-card {
+    min-height: 107px;
+    padding: 20px 21px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.greeting-card h2 {
+    margin: 0;
+    font-size: 18px;
+}
+
+.greeting-card p {
+    margin: 7px 0 0;
+    color: var(--text);
+    font-size: 16px;
+}
+
+.sun {
+    color: #ffb52f;
+    font-size: 39px;
+}
+
+
+/* =========================
+   오늘의 일정
+========================= */
+
+.schedule-card {
+    padding: 19px 21px 7px;
+}
+
+.section-title {
+    margin-bottom: 15px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.section-title > div {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+}
+
+.section-title h2 {
+    margin: 0;
+    font-size: 18px;
+}
+
+.count {
+    color: #7182a2;
+    font-size: 14px;
+}
+
+.section-title a {
+    color: #7383a0;
+    font-size: 13px;
+}
+
+.schedule-list {
+    position: relative;
+}
+
+.schedule-list::before {
+    content: "";
+    position: absolute;
+    top: 15px;
+    bottom: 20px;
+    left: 10px;
+    width: 1px;
+    background: #e7edf5;
+}
+
+.schedule-item {
+    min-height: 102px;
+    padding: 4px 0 13px;
+    display: flex;
+    align-items: flex-start;
+    gap: 16px;
+    position: relative;
+}
+
+.schedule-item + .schedule-item {
+    padding-top: 14px;
+    border-top: 1px solid var(--border);
+}
+
+.schedule-dot {
+    z-index: 1;
+    width: 14px;
+    height: 14px;
+    flex-shrink: 0;
+    margin: 10px 0 0 4px;
+    border: 2px solid white;
+    border-radius: 50%;
+}
+
+.schedule-item.pink .schedule-dot {
+    background: var(--pink);
+}
+
+.schedule-item.blue .schedule-dot {
+    background: #347eff;
+}
+
+.schedule-item.green .schedule-dot {
+    background: var(--green);
+}
+
+.schedule-info {
+    flex: 1;
+    min-width: 0;
+}
+
+.schedule-info .time {
+    color: #465879;
+    font-size: 14px;
+}
+
+.schedule-info h3 {
+    margin: 3px 0 5px;
+    font-size: 15px;
+}
+
+.schedule-info p {
+    margin: 0;
+    color: #8795ad;
+    font-size: 13px;
+}
+
+.schedule-tag {
+    padding: 8px 10px;
+    border-radius: 9px;
+    background: #fff0f2;
+    color: #ff6579;
+    font-size: 12px;
+    font-weight: 600;
+    white-space: nowrap;
+}
+
+.schedule-item.blue .schedule-tag {
+    background: #edf4ff;
+    color: #2672ed;
+}
+
+.schedule-item.green .schedule-tag {
+    background: #e9f8f1;
+    color: #20a66b;
+}
+
+
+/* =========================
+   계획 달성률
+========================= */
+
+.progress-card {
+    flex: 1;
+    min-height: 220px;
+    padding: 20px 21px;
+}
+
+.progress-header {
+    display: flex;
+    align-items: center;
+    gap: 13px;
+}
+
+.chart-icon {
+    width: 50px;
+    height: 50px;
+    display: grid;
+    place-items: center;
+    border-radius: 14px;
+    background: #f0f6ff;
+    color: #347eff;
+    font-size: 30px;
+}
+
+.progress-header h2 {
+    margin: 0;
+    font-size: 16px;
+}
+
+.progress-header p {
+    margin: 5px 0 0;
+    color: #7b8ba7;
+    font-size: 12px;
+}
+
+.progress-area {
+    margin: 19px 0 22px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.progress-bar {
+    height: 13px;
+    flex: 1;
+    overflow: hidden;
+    border-radius: 10px;
+    background: #f0f3f8;
+}
+
+.progress-value {
+    width: 78%;
+    height: 100%;
+    border-radius: inherit;
+    background: linear-gradient(90deg, #3982ff, #286bf0);
+}
+
+.progress-area strong {
+    color: #163b81;
+    font-size: 14px;
+}
+
+.progress-quote {
+    padding: 13px 15px;
+    display: flex;
+    align-items: flex-start;
+    gap: 15px;
+    border-radius: 14px;
+    background: #f1f6ff;
+    color: #38527d;
+}
+
+.progress-quote span {
+    color: #a9c9ff;
+    font: bold 39px/.9 Georgia, serif;
+}
+
+.progress-quote p {
+    margin: 0;
+    font-size: 15px;
+    line-height: 1.7;
+}
+
+
+/* =========================
+   캘린더
+========================= */
+
+.calendar-card {
+    min-width: 0;
+    padding: 22px 24px 17px;
+    display: flex;
+    flex-direction: column;
+}
+
+.calendar-header {
+    margin-bottom: 15px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.calendar-month {
+    display: flex;
+    align-items: center;
+    gap: 13px;
+}
+
+.calendar-month h2 {
+    margin: 0;
+    font-size: 25px;
+}
+
+.calendar-month button {
+    width: 34px;
+    height: 34px;
+    border: 0;
+    border-radius: 50%;
+    background: #f3f6fa;
+    color: #687b9b;
+    font-size: 25px;
+}
+
+.calendar-buttons {
+    display: flex;
+    gap: 16px;
+}
+
+.calendar-buttons button,
+.calendar-buttons select {
+    height: 41px;
+    padding: 0 17px;
+    border: 1px solid #e8edf4;
+    border-radius: 12px;
+    background: #f8f9fc;
+    color: #1b2c4b;
+}
+
+.calendar-grid {
+    flex: 1;
+    display: grid;
+    grid-template-columns: repeat(7, minmax(0, 1fr));
+    border-bottom: 1px solid var(--border);
+}
+
+.weekday {
+    height: 42px;
+    display: grid;
+    place-items: center;
+    border-bottom: 1px solid var(--border);
+    color: #687995;
+}
+
+.day {
+    min-width: 0;
+    min-height: 100px;
+    padding: 10px 9px 6px;
+    overflow: hidden;
+    border-right: 1px solid var(--border);
+    border-bottom: 1px solid var(--border);
+    text-align: center;
+}
+
+.day:nth-child(7n) {
+    border-right: 0;
+}
+
+.day.outside {
+    color: #b6c0d0;
+}
+
+.day.selected {
+    color: var(--navy);
+}
+
+.day.selected > span {
+    width: 34px;
+    height: 34px;
+    display: inline-grid;
+    place-items: center;
+    border-radius: 50%;
+    background: var(--primary);
+    color: white;
+    box-shadow: 0 4px 10px #8ab5ff;
+}
+
+.event {
+    display: block;
+    margin-top: 5px;
+    overflow: hidden;
+    color: #334564;
+    font-size: 11px;
+    line-height: 1.5;
+    text-align: left;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.event::before {
+    content: "";
+    width: 9px;
+    height: 9px;
+    display: inline-block;
+    margin-right: 6px;
+    border-radius: 50%;
+}
+
+.event.pink::before {
+    background: var(--pink);
+}
+
+.event.blue::before {
+    background: #347eff;
+}
+
+.event.green::before {
+    background: var(--green);
+}
+
+
+/* =========================
+   캘린더 하단
+========================= */
+
+.calendar-footer {
+    padding-top: 17px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.calendar-legend {
+    display: flex;
+    align-items: center;
+    gap: 25px;
+}
+
+.calendar-legend span {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 13px;
+}
+
+.calendar-legend i {
+    width: 11px;
+    height: 11px;
+    display: inline-block;
+    border-radius: 50%;
+}
+
+.calendar-legend .pink {
+    background: var(--pink);
+}
+
+.calendar-legend .blue {
+    background: #347eff;
+}
+
+.calendar-legend .green {
+    background: var(--green);
+}
+
+.calendar-legend .gray {
+    background: #98a5ba;
+}
+
+.add-schedule {
+    padding: 11px 15px;
+    border: 0;
+    border-radius: 12px;
+    background: #eef4ff;
+    color: #216df0;
+    font-weight: 600;
+}
+
+
+/* =========================
+   D-day
+========================= */
+
+.dday-card {
+    padding: 19px 20px 17px;
+}
+
+.dday-header {
+    margin-bottom: 20px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    flex-wrap: wrap;
+}
+
+.dday-header > span {
+    color: #2c7cff;
+    font-size: 25px;
+}
+
+.dday-header h2 {
+    margin: 0;
+    font-size: 18px;
+}
+
+.dday-header p {
+    margin: 0;
+    color: #71809e;
+    font-size: 12px;
+}
+
+.dday-list {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.dday-item {
+    display: grid;
+    grid-template-columns: 14px minmax(0, 1fr) auto;
+    align-items: start;
+    gap: 13px;
+}
+
+.dday-item > i {
+    width: 11px;
+    height: 11px;
+    margin-top: 7px;
+    border-radius: 50%;
+}
+
+.dday-item i.pink {
+    background: var(--pink);
+}
+
+.dday-item i.blue {
+    background: #347eff;
+}
+
+.dday-item i.green {
+    background: var(--green);
+}
+
+.dday-item i.purple {
+    background: var(--purple);
+}
+
+.dday-item h3 {
+    margin: 0 0 5px;
+    font-size: 14px;
+}
+
+.dday-item p {
+    margin: 0;
+    color: #8190aa;
+    font-size: 12px;
+}
+
+.dday-item strong {
+    color: #15315d;
+    font-size: 17px;
+    text-align: right;
+}
+
+.dday-item strong.urgent {
+    color: #ff536d;
+}
+
+.dday-item small {
+    display: block;
+    margin-top: 5px;
+    color: #7787a4;
+    font-size: 12px;
+    font-weight: 400;
+    white-space: nowrap;
+}
+
+
+/* =========================
+   체크리스트
+========================= */
+
+.checklist-card {
+    flex: 1;
+    padding: 19px 20px;
+}
+
+.checklist-card .section-title button {
+    border: 0;
+    background: transparent;
+    color: #2675f5;
+    font-weight: 600;
+}
+
+.check-list {
+    padding: 3px 0 18px;
+    display: flex;
+    flex-direction: column;
+    gap: 13px;
+    border-bottom: 1px solid var(--border);
+}
+
+.check-list label {
+    display: flex;
+    align-items: center;
+    gap: 11px;
+    color: #344766;
+    font-size: 14px;
+    cursor: pointer;
+}
+
+.check-list input {
+    appearance: none;
+    width: 20px;
+    height: 20px;
+    flex-shrink: 0;
+    margin: 0;
+    position: relative;
+    border: 1.5px solid #cbd5e3;
+    border-radius: 5px;
+}
+
+.check-list input:checked {
+    border-color: #347cf5;
+    background: #347cf5;
+}
+
+.check-list input:checked::after {
+    content: "✓";
+    position: absolute;
+    inset: -1px 0 0;
+    color: white;
+    font-size: 15px;
+    font-weight: 700;
+    text-align: center;
+}
+
+.check-list input:checked + span {
+    color: #8190a9;
+}
+
+
+/* =========================
+   오늘의 메시지
+========================= */
+
+.daily-message {
+    margin-top: 18px;
+    padding: 14px 15px;
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    border-radius: 14px;
+    background: #f0f6ff;
+}
+
+.daily-message > span {
+    font-size: 32px;
+}
+
+.daily-message strong {
+    font-size: 14px;
+}
+
+.daily-message p {
+    margin: 3px 0 0;
+    font-size: 13px;
+}
+
+.daily-message b {
+    margin-left: auto;
+    color: #347cf5;
+    font-size: 25px;
+    font-weight: 400;
+}
+
+
+/* =========================
+   태블릿 반응형
+========================= */
+
+@media (max-width: 1200px) {
+    .header {
+        gap: 15px;
+    }
+
+    .logo {
+        font-size: 24px;
+    }
+
+    .nav {
+        gap: 18px;
+    }
+
+    .search-box {
+        width: 200px;
+    }
+
+    .dashboard {
+        grid-template-columns:
+            minmax(260px, .9fr)
+            minmax(480px, 1.6fr);
+    }
+
+    .right-section {
+        grid-column: 1 / -1;
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+    }
+}
+
+
+/* =========================
+   모바일 반응형
+========================= */
+
+@media (max-width: 760px) {
+    .header {
+        height: auto;
+        min-height: 65px;
+        padding: 12px 16px;
+        flex-wrap: wrap;
+    }
+
+    .logo {
+        font-size: 23px;
+    }
+
+    .nav {
+        order: 3;
+        width: 100%;
+        height: 42px;
+        justify-content: space-between;
+        gap: 8px;
+    }
+
+    .nav a {
+        font-size: 12px;
+    }
+
+    .header-right {
+        margin-left: auto;
+        gap: 10px;
+    }
+
+    .search-box {
+        display: none;
+    }
+
+    .profile img {
+        width: 32px;
+        height: 32px;
+    }
+
+    .profile span {
+        display: none;
+    }
+
+    .hero {
+        min-height: 160px;
+        padding: 25px 18px;
+    }
+
+    .hero h1 {
+        font-size: 25px;
+    }
+
+    .hero-description {
+        font-size: 14px;
+    }
+
+    .hero-label {
+        font-size: 11px;
+    }
+
+    .hero-script,
+    .hero-quote {
+        display: none;
+    }
+
+    .dashboard {
+        padding: 0 12px 16px;
+        display: flex;
+        flex-direction: column;
+        gap: 12px;
+    }
+
+    .calendar-card {
+        order: -1;
+        padding: 15px 10px;
+    }
+
+    .calendar-month h2 {
+        font-size: 19px;
+    }
+
+    .calendar-buttons {
+        gap: 6px;
+    }
+
+    .calendar-buttons button,
+    .calendar-buttons select {
+        height: 36px;
+        padding: 0 9px;
+        font-size: 11px;
+    }
+
+    .day {
+        min-height: 70px;
+        padding: 6px 2px;
+    }
+
+    .event {
+        font-size: 0;
+        text-align: center;
+    }
+
+    .event::before {
+        width: 7px;
+        height: 7px;
+        margin: 0 2px;
+    }
+
+    .calendar-footer {
+        align-items: flex-start;
+        flex-direction: column;
+        gap: 12px;
+    }
+
+    .calendar-legend {
+        flex-wrap: wrap;
+        gap: 12px;
+    }
+
+    .calendar-legend span {
+        font-size: 11px;
+    }
+
+    .add-schedule {
+        align-self: flex-end;
+    }
+
+    .right-section {
+        display: flex;
+    }
+}

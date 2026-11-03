@@ -1,0 +1,376 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Overplan | 홈</title>
+
+    <!-- CSS -->
+    <link rel="stylesheet" href="../css/common.css">
+    <link rel="stylesheet" href="../css/home.css">
+
+    <!-- Google Font -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+</head>
+
+<body>
+    <!-- 상단 네비게이션 -->
+    <header class="header">
+        <a href="../index.html" class="logo">
+            <span class="logo-icon">O</span>
+            <span>Overplan</span>
+        </a>
+
+        <nav class="nav">
+            <a href="home.html" class="active">⌂ 홈</a>
+            <a href="#">▦ 캘린더</a>
+            <a href="#">☷ 일정 관리</a>
+            <a href="#">♙ 마이페이지</a>
+        </nav>
+
+        <div class="header-right">
+            <div class="search-box">
+                <span>⌕</span>
+                <input type="text" placeholder="일정, 과제, 키워드로 검색하세요...">
+            </div>
+
+            <button class="notification">♧<span></span></button>
+
+            <div class="profile">
+                <img src="../assets/images/profile.png" alt="프로필">
+                <span>박준서</span>
+            </div>
+        </div>
+    </header>
+
+    <main class="main-container">
+
+        <!-- 메인 배너 -->
+        <section class="hero">
+            <div class="hero-content">
+                <p class="hero-label">PLAN A BETTER TOMORROW</p>
+                <h1>오늘도 계획적으로, <span>Overplan</span></h1>
+                <p class="hero-description">
+                    작은 계획이 모여, 더 큰 성장을 만듭니다.
+                </p>
+            </div>
+
+            <div class="hero-script">
+                Good<br>
+                Plans<br>
+                Brighter<br>
+                Days
+            </div>
+
+            <div class="hero-quote">
+                <p>“ 오늘의 계획이<br>내일의 가능성을 만든다. ”</p>
+                <span>— Overplan</span>
+            </div>
+        </section>
+
+        <!-- 대시보드 -->
+        <section class="dashboard">
+
+            <!-- 왼쪽 영역 -->
+            <aside class="left-section">
+
+                <!-- 오늘 날짜 -->
+                <article class="card greeting-card">
+                    <div>
+                        <h2>2025년 4월 16일 (수)</h2>
+                        <p>좋은 하루 보내세요, 박준서님!</p>
+                    </div>
+                    <span class="sun">☀</span>
+                </article>
+
+                <!-- 오늘의 일정 -->
+                <article class="card schedule-card">
+                    <div class="section-title">
+                        <div>
+                            <h2>오늘의 일정</h2>
+                            <span class="count">3개</span>
+                        </div>
+                        <a href="#">전체 보기 <b>›</b></a>
+                    </div>
+
+                    <div class="schedule-list">
+
+                        <div class="schedule-item pink">
+                            <div class="schedule-dot"></div>
+                            <div class="schedule-info">
+                                <span class="time">09:00 - 11:00</span>
+                                <h3>수학 중간고사</h3>
+                                <p>⌖ 본관 302호</p>
+                            </div>
+                            <span class="schedule-tag">시험</span>
+                        </div>
+
+                        <div class="schedule-item blue">
+                            <div class="schedule-dot"></div>
+                            <div class="schedule-info">
+                                <span class="time">13:00 - 14:00</span>
+                                <h3>동아리 정기회의</h3>
+                                <p>⌖ 학생회관 2층</p>
+                            </div>
+                            <span class="schedule-tag">행사</span>
+                        </div>
+
+                        <div class="schedule-item green">
+                            <div class="schedule-dot"></div>
+                            <div class="schedule-info">
+                                <span class="time">16:00 - 18:00</span>
+                                <h3>과학 수행평가 팀 미팅</h3>
+                                <p>⌖ 도서관 스터디룸 A</p>
+                            </div>
+                            <span class="schedule-tag">수행평가</span>
+                        </div>
+
+                    </div>
+                </article>
+
+                <!-- 계획 달성률 -->
+                <article class="card progress-card">
+                    <div class="progress-header">
+                        <div class="chart-icon">▥</div>
+                        <div>
+                            <h2>지금까지도 잘 해왔어요!</h2>
+                            <p>계획한 일의 78%를 완료했어요.</p>
+                        </div>
+                    </div>
+
+                    <div class="progress-area">
+                        <div class="progress-bar">
+                            <div class="progress-value"></div>
+                        </div>
+                        <strong>78%</strong>
+                    </div>
+
+                    <div class="progress-quote">
+                        <span>“</span>
+                        <p>꾸준함이<br>특별함을 만듭니다.</p>
+                    </div>
+                </article>
+            </aside>
+
+            <!-- 중앙 캘린더 -->
+            <article class="card calendar-card">
+
+                <div class="calendar-header">
+                    <div class="calendar-month">
+                        <h2 id="month-title">2025년 4월</h2>
+                        <button id="prev-month">‹</button>
+                    </div>
+
+                    <div class="calendar-buttons">
+                        <button id="today-btn">오늘로 이동</button>
+                        <select>
+                            <option>월</option>
+                            <option>주</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="calendar-grid">
+
+                    <div class="weekday">일</div>
+                    <div class="weekday">월</div>
+                    <div class="weekday">화</div>
+                    <div class="weekday">수</div>
+                    <div class="weekday">목</div>
+                    <div class="weekday">금</div>
+                    <div class="weekday">토</div>
+
+                    <div class="day outside">30</div>
+                    <div class="day outside">31</div>
+                    <div class="day">1</div>
+                    <div class="day">
+                        2
+                        <small class="event pink">영어 모의고사</small>
+                    </div>
+                    <div class="day">3</div>
+                    <div class="day">
+                        4
+                        <small class="event blue">과학관 견학</small>
+                    </div>
+                    <div class="day">5</div>
+
+                    <div class="day">6</div>
+                    <div class="day">7</div>
+                    <div class="day">
+                        8
+                        <small class="event green">국어 수행평가</small>
+                    </div>
+                    <div class="day">9</div>
+                    <div class="day">
+                        10
+                        <small class="event pink">한국사 시험</small>
+                    </div>
+                    <div class="day">11</div>
+                    <div class="day">
+                        12
+                        <small class="event blue">체육대회</small>
+                    </div>
+
+                    <div class="day">13</div>
+                    <div class="day">14</div>
+                    <div class="day">15</div>
+
+                    <div class="day selected">
+                        <span>16</span>
+                        <small class="event pink">수학 중간고사</small>
+                        <small class="event blue">동아리 정기회의</small>
+                        <small class="event green">과학 수행평가 미팅</small>
+                    </div>
+
+                    <div class="day">17</div>
+                    <div class="day">
+                        18
+                        <small class="event green">사회 수행평가</small>
+                    </div>
+                    <div class="day">19</div>
+
+                    <div class="day">20</div>
+                    <div class="day">21</div>
+                    <div class="day">
+                        22
+                        <small class="event pink">수학 모의고사</small>
+                    </div>
+                    <div class="day">23</div>
+                    <div class="day">24</div>
+                    <div class="day">
+                        25
+                        <small class="event blue">진로 특강</small>
+                    </div>
+                    <div class="day">26</div>
+
+                    <div class="day">27</div>
+                    <div class="day">
+                        28
+                        <small class="event green">생명과학 보고서</small>
+                    </div>
+                    <div class="day">29</div>
+                    <div class="day">30</div>
+                    <div class="day outside">1</div>
+                    <div class="day outside">2</div>
+                    <div class="day outside">3</div>
+
+                </div>
+
+                <div class="calendar-footer">
+                    <div class="calendar-legend">
+                        <span><i class="pink"></i>시험</span>
+                        <span><i class="blue"></i>행사</span>
+                        <span><i class="green"></i>수행평가</span>
+                        <span><i class="gray"></i>기타</span>
+                    </div>
+
+                    <button class="add-schedule">＋ 일정 추가하기</button>
+                </div>
+            </article>
+
+            <!-- 오른쪽 영역 -->
+            <aside class="right-section">
+
+                <!-- D-day -->
+                <article class="card dday-card">
+                    <div class="dday-header">
+                        <span>◷</span>
+                        <h2>D-day</h2>
+                        <p>마감이 얼마 남지 않았어요!</p>
+                    </div>
+
+                    <div class="dday-list">
+
+                        <div class="dday-item">
+                            <i class="pink"></i>
+                            <div>
+                                <h3>수학 수행평가 보고서</h3>
+                                <p>수학 | 개인 과제</p>
+                            </div>
+                            <strong class="urgent">D-2<small>4월 18일 (금)</small></strong>
+                        </div>
+
+                        <div class="dday-item">
+                            <i class="blue"></i>
+                            <div>
+                                <h3>과학 탐구 발표</h3>
+                                <p>과학 | 조별 과제</p>
+                            </div>
+                            <strong class="urgent">D-4<small>4월 20일 (일)</small></strong>
+                        </div>
+
+                        <div class="dday-item">
+                            <i class="green"></i>
+                            <div>
+                                <h3>국어 문학 감상문</h3>
+                                <p>국어 | 개인 과제</p>
+                            </div>
+                            <strong class="urgent">D-6<small>4월 22일 (화)</small></strong>
+                        </div>
+
+                        <div class="dday-item">
+                            <i class="purple"></i>
+                            <div>
+                                <h3>동아리 활동보고서</h3>
+                                <p>동아리 | 제출 과제</p>
+                            </div>
+                            <strong>D-7<small>4월 23일 (수)</small></strong>
+                        </div>
+
+                    </div>
+                </article>
+
+                <!-- 체크리스트 -->
+                <article class="card checklist-card">
+                    <div class="section-title">
+                        <div>
+                            <h2>오늘의 준비 사항</h2>
+                            <span class="count" id="check-count">2/5</span>
+                        </div>
+                        <button id="add-task">＋ 추가하기</button>
+                    </div>
+
+                    <div class="check-list" id="check-list">
+                        <label>
+                            <input type="checkbox" checked>
+                            <span>수학 시험 범위 마지막 복습</span>
+                        </label>
+
+                        <label>
+                            <input type="checkbox" checked>
+                            <span>과학 수행평가 자료 정리</span>
+                        </label>
+
+                        <label>
+                            <input type="checkbox">
+                            <span>동아리 회의 자료 준비</span>
+                        </label>
+
+                        <label>
+                            <input type="checkbox">
+                            <span>영어 단어 30개 암기</span>
+                        </label>
+
+                        <label>
+                            <input type="checkbox">
+                            <span>도서관에서 참고자료 찾기</span>
+                        </label>
+                    </div>
+
+                    <div class="daily-message">
+                        <span>🌱</span>
+                        <div>
+                            <strong>오늘의 계획이</strong>
+                            <p>더 나은 내일을 만듭니다.</p>
+                        </div>
+                        <b>›</b>
+                    </div>
+                </article>
+
+            </aside>
+        </section>
+    </main>
+</body>
+</html>

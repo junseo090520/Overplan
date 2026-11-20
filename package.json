@@ -1,0 +1,14 @@
+{
+  "name": "overplan",
+  "version": "1.0.0",
+  "description": "Personal schedule and study management",
+  "main": "server/app.js",
+  "scripts": {
+    "start": "node server/app.js"
+  },
+  "dependencies": {
+    "cors": "^2.8.5",
+    "dotenv": "^16.4.7",
+    "express": "^4.21.2"
+  }
+}

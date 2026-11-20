@@ -1,0 +1,1045 @@
+
+/* =========================
+   기본 설정
+========================= */
+
+* {
+    box-sizing: border-box;
+}
+
+:root {
+    --primary: #347cf5;
+    --navy: #142342;
+    --text: #344766;
+    --muted: #8290a9;
+    --border: #edf1f7;
+    --pink: #ff7185;
+    --green: #2eb477;
+    --purple: #9a59ee;
+}
+
+body {
+    margin: 0;
+    background: #f4f7fc;
+    color: var(--navy);
+    font-family: "Noto Sans KR", sans-serif;
+    font-size: 14px;
+}
+
+button,
+input,
+select {
+    font: inherit;
+}
+
+button {
+    cursor: pointer;
+}
+
+a {
+    color: inherit;
+    text-decoration: none;
+}
+
+/* =========================
+   상단 네비게이션
+========================= */
+
+.header {
+    height: 72px;
+    padding: 0 2.8%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 25px;
+    background: white;
+    border-bottom: 1px solid var(--border);
+}
+
+.logo {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    font-size: 29px;
+    font-weight: 800;
+    letter-spacing: -1px;
+    white-space: nowrap;
+}
+
+.logo-icon {
+    width: 35px;
+    height: 35px;
+    display: grid;
+    place-items: center;
+    border-radius: 11px;
+    background: linear-gradient(135deg, #7bb5ff, #1765ec);
+    color: white;
+    font-size: 22px;
+}
+
+.nav {
+    height: 100%;
+    display: flex;
+    align-items: stretch;
+    gap: 38px;
+}
+
+.nav a {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    position: relative;
+    color: #50617f;
+    font-size: 16px;
+    white-space: nowrap;
+}
+
+.nav a.active {
+    color: var(--primary);
+    font-weight: 700;
+}
+
+.nav a.active::after {
+    content: "";
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 3px;
+    border-radius: 5px 5px 0 0;
+    background: var(--primary);
+}
+
+.header-right {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+
+.search-box {
+    width: 290px;
+    height: 42px;
+    padding: 0 15px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    border-radius: 25px;
+    background: #f2f5fa;
+    color: #60718f;
+    font-size: 25px;
+}
+
+.search-box input {
+    width: 100%;
+    border: none;
+    outline: none;
+    background: transparent;
+    font-size: 12px;
+}
+
+.search-box input::placeholder {
+    color: #a1adc1;
+}
+
+.notification {
+    position: relative;
+    border: none;
+    background: transparent;
+    color: #435675;
+    font-size: 25px;
+}
+
+.notification span {
+    position: absolute;
+    top: 2px;
+    right: 0;
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: #ff6e7d;
+}
+
+.profile {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-weight: 600;
+    white-space: nowrap;
+}
+
+.profile img {
+    width: 39px;
+    height: 39px;
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+/* =========================
+   메인 레이아웃
+========================= */
+
+.main-container {
+    max-width: 1800px;
+    margin: 0 auto;
+    padding: 30px 2.8% 40px;
+}
+
+/* =========================
+   페이지 제목
+========================= */
+
+.page-intro {
+    margin-bottom: 25px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.intro-label {
+    margin: 0 0 7px;
+    color: #4e8cff;
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 1px;
+}
+
+.page-intro h1 {
+    margin: 0;
+    font-size: 30px;
+    font-weight: 800;
+    letter-spacing: -1px;
+}
+
+.page-intro h1 span {
+    color: var(--primary);
+}
+
+.page-intro > div > p:last-child {
+    margin: 8px 0 0;
+    color: #7484a1;
+    font-size: 14px;
+}
+
+.primary-button {
+    padding: 13px 20px;
+    border: none;
+    border-radius: 12px;
+    background: var(--primary);
+    color: white;
+    font-weight: 600;
+    box-shadow: 0 5px 13px rgba(52, 124, 245, .2);
+}
+
+/* =========================
+   일정 요약 카드
+========================= */
+
+.summary-grid {
+    margin-bottom: 20px;
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 15px;
+}
+
+.summary-card {
+    min-height: 105px;
+    padding: 19px 21px;
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    background: white;
+    box-shadow: 0 8px 28px rgba(31, 69, 124, .035);
+}
+
+.summary-icon {
+    width: 49px;
+    height: 49px;
+    flex-shrink: 0;
+    display: grid;
+    place-items: center;
+    border-radius: 14px;
+    font-size: 25px;
+}
+
+.summary-icon.blue {
+    background: #edf4ff;
+    color: #347cf5;
+}
+
+.summary-icon.pink {
+    background: #fff0f2;
+    color: var(--pink);
+}
+
+.summary-icon.green {
+    background: #e9f8f1;
+    color: var(--green);
+}
+
+.summary-icon.purple {
+    background: #f4edff;
+    color: var(--purple);
+}
+
+.summary-card p {
+    margin: 0 0 5px;
+    color: #7787a3;
+    font-size: 13px;
+}
+
+.summary-card h2 {
+    margin: 0;
+    color: var(--navy);
+    font-size: 25px;
+}
+
+.summary-card h2 span {
+    margin-left: 4px;
+    color: #8290a9;
+    font-size: 13px;
+    font-weight: 500;
+}
+
+/* =========================
+   공통 카드
+========================= */
+
+.card {
+    border: 1px solid var(--border);
+    border-radius: 17px;
+    background: white;
+    box-shadow: 0 8px 28px rgba(31, 69, 124, .035);
+}
+
+/* =========================
+   캘린더 레이아웃
+========================= */
+
+.calendar-layout {
+    display: grid;
+    grid-template-columns: minmax(0, 2.1fr) minmax(310px, .9fr);
+    align-items: start;
+    gap: 18px;
+}
+
+.calendar-card {
+    min-width: 0;
+    padding: 25px;
+}
+
+.calendar-header {
+    margin-bottom: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 15px;
+}
+
+.calendar-subtitle {
+    margin: 0 0 6px;
+    color: #8b9ab2;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 1px;
+}
+
+.calendar-month {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.calendar-month h2 {
+    margin: 0 8px 0 0;
+    font-size: 25px;
+    letter-spacing: -.7px;
+}
+
+.calendar-month button {
+    width: 33px;
+    height: 33px;
+    border: none;
+    border-radius: 50%;
+    background: #f3f6fa;
+    color: #687b9b;
+    font-size: 23px;
+}
+
+.calendar-controls {
+    display: flex;
+    align-items: center;
+    gap: 9px;
+}
+
+.calendar-controls button,
+.calendar-controls select {
+    height: 38px;
+    padding: 0 13px;
+    border: 1px solid #e8edf4;
+    border-radius: 10px;
+    background: #f8f9fc;
+    color: #435675;
+    font-size: 13px;
+}
+
+.calendar-legend {
+    margin-bottom: 15px;
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 20px;
+}
+
+.calendar-legend span {
+    display: flex;
+    align-items: center;
+    gap: 7px;
+    color: #687995;
+    font-size: 12px;
+}
+
+.calendar-legend i {
+    width: 9px;
+    height: 9px;
+    display: inline-block;
+    border-radius: 50%;
+}
+
+.calendar-legend .pink {
+    background: var(--pink);
+}
+
+.calendar-legend .blue {
+    background: #347eff;
+}
+
+.calendar-legend .green {
+    background: var(--green);
+}
+
+.calendar-legend .purple {
+    background: var(--purple);
+}
+
+/* =========================
+   달력 날짜
+========================= */
+
+.calendar-grid {
+    display: grid;
+    grid-template-columns: repeat(7, minmax(0, 1fr));
+    border-top: 1px solid var(--border);
+    border-left: 1px solid var(--border);
+}
+
+.weekday {
+    height: 43px;
+    display: grid;
+    place-items: center;
+    border-right: 1px solid var(--border);
+    border-bottom: 1px solid var(--border);
+    color: #687995;
+    font-size: 13px;
+    font-weight: 600;
+}
+
+.weekday.sunday {
+    color: #f07888;
+}
+
+.weekday.saturday {
+    color: #4d8cf5;
+}
+
+.day {
+    min-width: 0;
+    min-height: 125px;
+    padding: 10px 8px;
+    overflow: hidden;
+    border-right: 1px solid var(--border);
+    border-bottom: 1px solid var(--border);
+    background: white;
+}
+
+.day > span {
+    width: 28px;
+    height: 28px;
+    display: grid;
+    place-items: center;
+    border-radius: 50%;
+    color: #344766;
+    font-size: 13px;
+}
+
+.day.outside > span {
+    color: #b6c0d0;
+}
+
+.day.selected {
+    background: #f5f8ff;
+}
+
+.day.selected > span {
+    background: var(--primary);
+    color: white;
+    box-shadow: 0 3px 9px rgba(52, 124, 245, .25);
+}
+
+.event {
+    display: block;
+    margin-top: 6px;
+    padding: 4px 5px;
+    overflow: hidden;
+    border-radius: 5px;
+    font-size: 10px;
+    line-height: 1.4;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.event.pink {
+    background: #fff0f2;
+    color: #ed6479;
+}
+
+.event.blue {
+    background: #edf4ff;
+    color: #347cf5;
+}
+
+.event.green {
+    background: #e9f8f1;
+    color: #20a66b;
+}
+
+.event.purple {
+    background: #f4edff;
+    color: #9256dc;
+}
+
+/* =========================
+   오른쪽 사이드바
+========================= */
+
+.calendar-sidebar {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+.detail-card,
+.workload-card,
+.upcoming-card {
+    padding: 21px;
+}
+
+.sidebar-title {
+    margin-bottom: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 10px;
+}
+
+.sidebar-title p {
+    margin: 0 0 5px;
+    color: #8b9ab2;
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: .8px;
+}
+
+.sidebar-title h2 {
+    margin: 0;
+    font-size: 17px;
+}
+
+.sidebar-title h2 span {
+    margin-left: 5px;
+    color: #8492a9;
+    font-size: 12px;
+    font-weight: 500;
+}
+
+.date-icon {
+    width: 43px;
+    height: 43px;
+    display: grid;
+    place-items: center;
+    border-radius: 12px;
+    background: #edf4ff;
+    color: var(--primary);
+    font-size: 19px;
+    font-weight: 700;
+}
+
+/* 선택 날짜 일정 */
+
+.detail-list {
+    display: flex;
+    flex-direction: column;
+}
+
+.detail-item {
+    padding: 13px 0 13px 13px;
+    border-left: 3px solid;
+    border-bottom: 1px solid var(--border);
+}
+
+.detail-item:first-child {
+    padding-top: 0;
+}
+
+.detail-item.pink {
+    border-left-color: var(--pink);
+}
+
+.detail-item.blue {
+    border-left-color: #347eff;
+}
+
+.detail-item.green {
+    border-left-color: var(--green);
+}
+
+.detail-time {
+    margin-bottom: 5px;
+    color: #7c8ba5;
+    font-size: 11px;
+}
+
+.detail-content h3 {
+    margin: 0 0 4px;
+    font-size: 14px;
+}
+
+.detail-content p {
+    margin: 0;
+    color: #8a98ae;
+    font-size: 11px;
+}
+
+.detail-add-button {
+    width: 100%;
+    height: 41px;
+    margin-top: 15px;
+    border: 1px dashed #b8d0fb;
+    border-radius: 10px;
+    background: #f6f9ff;
+    color: #347cf5;
+    font-size: 12px;
+    font-weight: 600;
+}
+
+/* 학업 부하 */
+
+.workload-icon {
+    width: 38px;
+    height: 38px;
+    display: grid;
+    place-items: center;
+    border-radius: 11px;
+    background: #fff5e9;
+    color: #f2a342;
+    font-size: 22px;
+}
+
+.workload-number {
+    margin-bottom: 12px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.workload-number strong {
+    color: #193b75;
+    font-size: 29px;
+}
+
+.warning {
+    padding: 5px 9px;
+    border-radius: 7px;
+    background: #fff3e6;
+    color: #e99537;
+    font-size: 11px;
+    font-weight: 600;
+}
+
+.workload-bar {
+    height: 11px;
+    overflow: hidden;
+    border-radius: 10px;
+    background: #edf1f7;
+}
+
+.workload-bar div {
+    width: 85%;
+    height: 100%;
+    border-radius: inherit;
+    background: linear-gradient(90deg, #ffc36d, #f29c42);
+}
+
+.workload-info {
+    margin-top: 13px;
+    display: flex;
+    justify-content: space-between;
+    gap: 8px;
+    color: #8492a9;
+    font-size: 11px;
+}
+
+.workload-info strong {
+    color: #4b5e7c;
+    font-size: 11px;
+}
+
+.workload-message {
+    margin: 16px 0 0;
+    padding: 12px;
+    border-radius: 10px;
+    background: #fff8ef;
+    color: #9b784f;
+    font-size: 11px;
+    line-height: 1.7;
+}
+
+/* =========================
+   다가오는 마감
+========================= */
+
+.upcoming-card .sidebar-title {
+    margin-bottom: 15px;
+}
+
+.upcoming-card .sidebar-title a {
+    color: #7d8ba4;
+    font-size: 11px;
+}
+
+.upcoming-item {
+    padding: 12px 0;
+    display: grid;
+    grid-template-columns: 43px minmax(0, 1fr) auto;
+    align-items: center;
+    gap: 11px;
+    border-bottom: 1px solid var(--border);
+}
+
+.upcoming-item:last-child {
+    padding-bottom: 0;
+    border-bottom: none;
+}
+
+.upcoming-date {
+    width: 43px;
+    height: 48px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    border-radius: 9px;
+}
+
+.upcoming-date strong {
+    font-size: 17px;
+    line-height: 1.2;
+}
+
+.upcoming-date span {
+    margin-top: 2px;
+    font-size: 10px;
+}
+
+.pink-bg {
+    background: #fff0f2;
+    color: #ed6479;
+}
+
+.blue-bg {
+    background: #edf4ff;
+    color: #347cf5;
+}
+
+.green-bg {
+    background: #e9f8f1;
+    color: #20a66b;
+}
+
+.upcoming-item h3 {
+    margin: 0 0 5px;
+    overflow: hidden;
+    font-size: 12px;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.upcoming-item p {
+    margin: 0;
+    color: #8a98ae;
+    font-size: 10px;
+}
+
+.dday {
+    color: #687995;
+    font-size: 13px;
+}
+
+.dday.urgent {
+    color: #ff6479;
+}
+
+/* =========================
+   반응형
+========================= */
+
+@media (max-width: 1200px) {
+    .header {
+        gap: 15px;
+    }
+
+    .logo {
+        font-size: 24px;
+    }
+
+    .nav {
+        gap: 18px;
+    }
+
+    .search-box {
+        width: 200px;
+    }
+
+    .calendar-layout {
+        grid-template-columns: minmax(0, 1.6fr) minmax(280px, .9fr);
+    }
+
+    .day {
+        min-height: 105px;
+        padding: 7px 5px;
+    }
+
+    .event {
+        font-size: 9px;
+    }
+}
+
+@media (max-width: 900px) {
+    .summary-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .calendar-layout {
+        grid-template-columns: 1fr;
+    }
+
+    .calendar-sidebar {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .upcoming-card {
+        grid-column: 1 / -1;
+    }
+}
+
+@media (max-width: 760px) {
+    .header {
+        height: auto;
+        min-height: 65px;
+        padding: 12px 16px;
+        flex-wrap: wrap;
+    }
+
+    .logo {
+        font-size: 23px;
+    }
+
+    .nav {
+        order: 3;
+        width: 100%;
+        height: 42px;
+        justify-content: space-between;
+        gap: 8px;
+    }
+
+    .nav a {
+        font-size: 12px;
+    }
+
+    .header-right {
+        margin-left: auto;
+        gap: 10px;
+    }
+
+    .search-box {
+        display: none;
+    }
+
+    .profile img {
+        width: 32px;
+        height: 32px;
+    }
+
+    .profile span {
+        display: none;
+    }
+
+    .main-container {
+        padding: 22px 12px;
+    }
+
+    .page-intro {
+        align-items: flex-start;
+        gap: 12px;
+    }
+
+    .page-intro h1 {
+        font-size: 24px;
+    }
+
+    .page-intro > div > p:last-child {
+        max-width: 220px;
+        font-size: 12px;
+    }
+
+    .primary-button {
+        padding: 11px;
+        font-size: 11px;
+        white-space: nowrap;
+    }
+
+    .summary-grid {
+        gap: 9px;
+    }
+
+    .summary-card {
+        min-height: 85px;
+        padding: 12px;
+        gap: 9px;
+    }
+
+    .summary-icon {
+        width: 38px;
+        height: 38px;
+        font-size: 20px;
+    }
+
+    .summary-card p {
+        font-size: 10px;
+    }
+
+    .summary-card h2 {
+        font-size: 21px;
+    }
+
+    .calendar-card {
+        padding: 15px 10px;
+    }
+
+    .calendar-header {
+        align-items: flex-start;
+        flex-direction: column;
+    }
+
+    .calendar-month h2 {
+        font-size: 20px;
+    }
+
+    .calendar-controls {
+        width: 100%;
+        justify-content: flex-end;
+    }
+
+    .calendar-legend {
+        gap: 10px;
+    }
+
+    .calendar-legend span {
+        font-size: 10px;
+    }
+
+    .weekday {
+        height: 35px;
+        font-size: 11px;
+    }
+
+    .day {
+        min-height: 75px;
+        padding: 5px 2px;
+    }
+
+    .day > span {
+        width: 23px;
+        height: 23px;
+        margin: 0 auto;
+        font-size: 11px;
+    }
+
+    .event {
+        margin-top: 5px;
+        padding: 3px 2px;
+        font-size: 0;
+        text-align: center;
+    }
+
+    .event::before {
+        content: "";
+        width: 6px;
+        height: 6px;
+        display: inline-block;
+        border-radius: 50%;
+    }
+
+    .event.pink::before {
+        background: var(--pink);
+    }
+
+    .event.blue::before {
+        background: #347eff;
+    }
+
+    .event.green::before {
+        background: var(--green);
+    }
+
+    .event.purple::before {
+        background: var(--purple);
+    }
+
+    .calendar-sidebar {
+        display: flex;
+    }
+}
+
+/* =========================
+   JavaScript 동적 달력
+========================= */
+
+.day {
+    cursor: pointer;
+    transition: background .15s ease;
+}
+
+.day:hover {
+    background: #f5f8ff;
+}
+
+.day.today > span {
+    border: 1px solid var(--primary);
+    color: var(--primary);
+}
+
+.day.selected > span {
+    border: none;
+    background: var(--primary);
+    color: white;
+}
+
+.empty-message {
+    padding: 25px 0;
+    color: #929fb3;
+    font-size: 13px;
+    text-align: center;
+}

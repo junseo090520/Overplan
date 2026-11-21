@@ -1,0 +1,239 @@
+* {
+    box-sizing: border-box;
+}
+
+:root {
+    --primary: #347cf5;
+    --navy: #142342;
+    --text: #344766;
+    --muted: #8290a9;
+    --border: #edf1f7;
+    --pink: #ff7185;
+    --green: #2eb477;
+}
+
+body {
+    min-height: 100vh;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    background: #f4f7fc;
+    color: var(--navy);
+    font-family: "Noto Sans KR", sans-serif;
+    font-size: 14px;
+}
+
+button,
+input {
+    font: inherit;
+}
+
+button {
+    cursor: pointer;
+}
+
+a {
+    color: inherit;
+    text-decoration: none;
+}
+
+/* =========================
+   레이아웃
+========================= */
+
+.auth-wrapper {
+    flex: 1;
+    padding: 40px 16px;
+    display: grid;
+    place-items: center;
+}
+
+.auth-box {
+    width: 100%;
+    max-width: 420px;
+}
+
+/* =========================
+   로고
+========================= */
+
+.logo {
+    margin-bottom: 26px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+    font-size: 29px;
+    font-weight: 800;
+    letter-spacing: -1px;
+}
+
+.logo-icon {
+    width: 35px;
+    height: 35px;
+    display: grid;
+    place-items: center;
+    border-radius: 11px;
+    background: linear-gradient(135deg, #7bb5ff, #1765ec);
+    color: white;
+    font-size: 20px;
+}
+
+/* =========================
+   카드
+========================= */
+
+.auth-card {
+    padding: 34px 30px;
+    border: 1px solid var(--border);
+    border-radius: 17px;
+    background: white;
+    box-shadow: 0 8px 28px rgba(31, 69, 124, .035);
+}
+
+.intro-label {
+    margin: 0 0 7px;
+    color: #4e8cff;
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 1px;
+}
+
+.auth-card h1 {
+    margin: 0;
+    font-size: 26px;
+    font-weight: 800;
+    letter-spacing: -1px;
+}
+
+.auth-card h1 span {
+    color: var(--primary);
+}
+
+.auth-desc {
+    margin: 8px 0 26px;
+    color: #7484a1;
+    font-size: 13px;
+}
+
+/* =========================
+   폼
+========================= */
+
+.form-group {
+    margin-bottom: 16px;
+}
+
+.form-group label {
+    margin-bottom: 7px;
+    display: block;
+    color: #435675;
+    font-size: 13px;
+    font-weight: 600;
+}
+
+.form-group input {
+    width: 100%;
+    height: 46px;
+    padding: 0 14px;
+    border: 1px solid #e8edf4;
+    border-radius: 10px;
+    outline: none;
+    background: #f8f9fc;
+    color: var(--navy);
+    font-size: 14px;
+    transition: border-color .15s ease, background .15s ease, box-shadow .15s ease;
+}
+
+.form-group input::placeholder {
+    color: #a1adc1;
+}
+
+.form-group input:focus {
+    border-color: var(--primary);
+    background: white;
+    box-shadow: 0 0 0 3px rgba(52, 124, 245, .12);
+}
+
+.form-hint {
+    margin: 6px 0 0;
+    color: #8a98ae;
+    font-size: 11px;
+}
+
+/* 에러 / 성공 메시지 */
+
+.form-message {
+    min-height: 18px;
+    margin: 4px 0 14px;
+    font-size: 12px;
+    line-height: 1.5;
+}
+
+.form-message.error {
+    color: #ed6479;
+}
+
+.form-message.success {
+    color: #20a66b;
+}
+
+/* =========================
+   버튼
+========================= */
+
+.primary-button {
+    width: 100%;
+    height: 48px;
+    border: none;
+    border-radius: 12px;
+    background: var(--primary);
+    color: white;
+    font-weight: 600;
+    box-shadow: 0 5px 13px rgba(52, 124, 245, .2);
+    transition: opacity .15s ease;
+}
+
+.primary-button:hover {
+    opacity: .92;
+}
+
+.primary-button:disabled {
+    opacity: .6;
+    cursor: not-allowed;
+}
+
+/* =========================
+   하단 링크
+========================= */
+
+.auth-footer {
+    margin: 22px 0 0;
+    color: #7787a3;
+    font-size: 13px;
+    text-align: center;
+}
+
+.auth-footer a {
+    margin-left: 6px;
+    color: var(--primary);
+    font-weight: 700;
+}
+
+/* =========================
+   반응형
+========================= */
+
+@media (max-width: 480px) {
+    .auth-wrapper {
+        padding: 24px 12px;
+    }
+
+    .auth-card {
+        padding: 26px 20px;
+    }
+
+    .logo {
+        font-size: 24px;
+    }
+}

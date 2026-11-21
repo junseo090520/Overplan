@@ -1,9 +1,9 @@
-
 const express = require("express");
 const cors = require("cors");
 const dotenv = require("dotenv");
 const path = require("path");
-
+const cookieParser = require("cookie-parser");
+const authRoutes = require("./routes/authRoutes");
 const schoolRoutes = require("./routes/schoolRoutes");
 
 // 프로젝트 최상위의 .env 불러오기
@@ -17,9 +17,14 @@ const PORT = 3000;
 // 미들웨어
 app.use(cors());
 app.use(express.json());
+app.use(cookieParser());
+app.use(express.static(path.join(__dirname, "../public")));
 
 // 학사일정 라우터
 app.use("/api/school", schoolRoutes);
+
+// 로그인
+app.use("/api/auth", authRoutes);
 
 // 서버 실행
 app.listen(PORT, () => {

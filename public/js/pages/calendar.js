@@ -8,7 +8,6 @@ const monthTitle = document.getElementById("month-title");
 const prevMonthButton = document.getElementById("prev-month");
 const nextMonthButton = document.getElementById("next-month");
 const todayButton = document.getElementById("today-btn");
-const addScheduleButton = document.getElementById("add-schedule-btn");
 const detailAddButton = document.getElementById("detail-add-button");
 const detailList = document.getElementById("detail-list");
 
@@ -379,7 +378,6 @@ todayButton.addEventListener("click", () => {
 });
 
 // 일정 추가 버튼
-addScheduleButton.addEventListener("click", addSchedule);
 detailAddButton.addEventListener("click", addSchedule);
 
 /* =========================

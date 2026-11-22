@@ -64,17 +64,6 @@ a {
     white-space: nowrap;
 }
 
-.logo-icon {
-    width: 35px;
-    height: 35px;
-    display: grid;
-    place-items: center;
-    border-radius: 11px;
-    background: linear-gradient(135deg, #7bb5ff, #1765ec);
-    color: white;
-    font-size: 22px;
-}
-
 .nav {
     height: 100%;
     display: flex;
@@ -183,7 +172,7 @@ a {
 }
 
 .hero {
-    min-height: 177px;
+    min-height: 10px;
     padding: 30px 2.8%;
     margin-bottom: 14px;
     display: flex;
@@ -269,7 +258,7 @@ a {
 ========================= */
 
 .dashboard {
-    padding: 0 20px 24px;
+    padding: 20px 24px;
     display: grid;
     grid-template-columns:
         minmax(285px, 1.02fr)

@@ -66,17 +66,6 @@ a {
     white-space: nowrap;
 }
 
-.logo-icon {
-    width: 35px;
-    height: 35px;
-    display: grid;
-    place-items: center;
-    border-radius: 11px;
-    background: linear-gradient(135deg, #7bb5ff, #1765ec);
-    color: white;
-    font-size: 22px;
-}
-
 .nav {
     height: 100%;
     display: flex;
@@ -188,21 +177,6 @@ a {
    페이지 제목
 ========================= */
 
-.page-intro {
-    margin-bottom: 25px;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-}
-
-.intro-label {
-    margin: 0 0 7px;
-    color: #4e8cff;
-    font-size: 12px;
-    font-weight: 700;
-    letter-spacing: 1px;
-}
-
 .page-intro h1 {
     margin: 0;
     font-size: 30px;
@@ -218,16 +192,6 @@ a {
     margin: 8px 0 0;
     color: #7484a1;
     font-size: 14px;
-}
-
-.primary-button {
-    padding: 13px 20px;
-    border: none;
-    border-radius: 12px;
-    background: var(--primary);
-    color: white;
-    font-weight: 600;
-    box-shadow: 0 5px 13px rgba(52, 124, 245, .2);
 }
 
 /* =========================
@@ -902,12 +866,6 @@ a {
     .page-intro > div > p:last-child {
         max-width: 220px;
         font-size: 12px;
-    }
-
-    .primary-button {
-        padding: 11px;
-        font-size: 11px;
-        white-space: nowrap;
     }
 
     .summary-grid {

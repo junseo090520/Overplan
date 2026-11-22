@@ -1,3 +1,7 @@
+/* =========================
+   기본 설정 (calendar.css와 동일한 디자인 토큰)
+========================= */
+
 * {
     box-sizing: border-box;
 }
@@ -236,4 +240,97 @@ a {
     .logo {
         font-size: 24px;
     }
+}
+
+/* =========================
+   학교 검색 (회원가입)
+========================= */
+
+.school-search {
+    display: flex;
+    gap: 8px;
+}
+
+.school-search input {
+    flex: 1;
+    min-width: 0;
+}
+
+.secondary-button {
+    height: 46px;
+    padding: 0 16px;
+    flex-shrink: 0;
+    border: 1px solid #b8d0fb;
+    border-radius: 10px;
+    background: #f6f9ff;
+    color: var(--primary);
+    font-size: 13px;
+    font-weight: 600;
+}
+
+.secondary-button:disabled {
+    opacity: .6;
+    cursor: not-allowed;
+}
+
+.school-results {
+    max-height: 220px;
+    margin: 8px 0 0;
+    padding: 0;
+    overflow-y: auto;
+    list-style: none;
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    background: white;
+}
+
+.school-results[hidden],
+.selected-school[hidden] {
+    display: none;
+}
+
+.school-results li + li {
+    border-top: 1px solid var(--border);
+}
+
+.school-result-button {
+    width: 100%;
+    padding: 11px 14px;
+    display: flex;
+    flex-direction: column;
+    gap: 3px;
+    border: none;
+    background: transparent;
+    text-align: left;
+}
+
+.school-result-button:hover {
+    background: #f5f8ff;
+}
+
+.school-result-button strong {
+    color: var(--navy);
+    font-size: 13px;
+}
+
+.school-result-button span {
+    color: #8a98ae;
+    font-size: 11px;
+}
+
+.school-empty {
+    padding: 14px;
+    color: #929fb3;
+    font-size: 12px;
+    text-align: center;
+}
+
+.selected-school {
+    margin: 8px 0 0;
+    padding: 10px 12px;
+    border-radius: 10px;
+    background: #edf4ff;
+    color: var(--primary);
+    font-size: 12px;
+    font-weight: 600;
 }

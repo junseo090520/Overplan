@@ -58,6 +58,21 @@
                         >
                     </div>
 
+                    <div class="form-group">
+                        <label for="schoolKeyword">학교</label>
+                        <div class="school-search">
+                            <input
+                                type="text"
+                                id="schoolKeyword"
+                                placeholder="학교 이름을 검색하세요"
+                                autocomplete="off"
+                            >
+                            <button type="button" id="schoolSearchButton" class="secondary-button">검색</button>
+                        </div>
+                        <ul id="schoolResults" class="school-results" hidden></ul>
+                        <p id="selectedSchool" class="selected-school" hidden></p>
+                    </div>
+
                     <p id="message" class="form-message" role="alert"></p>
 
                     <button type="submit" id="submitButton" class="primary-button">회원가입</button>

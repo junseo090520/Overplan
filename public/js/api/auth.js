@@ -13,8 +13,15 @@ async function post(url, body) {
     return data;
 }
 
-export function signup(name, password) {
-    return post("/api/auth/signup", { name, password });
+// school = { officeCode, schoolCode, schoolName }
+export function signup(name, password, school) {
+    return post("/api/auth/signup", {
+        name,
+        password,
+        officeCode: school.officeCode,
+        schoolCode: school.schoolCode,
+        schoolName: school.schoolName,
+    });
 }
 
 export function login(name, password) {

@@ -26,9 +26,9 @@ exports.signup = async (req, res) => {
 
 exports.login = async (req, res) => {
   try {
-    const { token, name } = await authService.login(req.body);
+    const { token, name, schoolName } = await authService.login(req.body);
     res.cookie("token", token, COOKIE_OPTIONS);
-    res.json({ message: "로그인 성공", name });
+    res.json({ message: "로그인 성공", name, schoolName });
   } catch (err) {
     handleError(res, err);
   }
@@ -40,5 +40,6 @@ exports.logout = (req, res) => {
 };
 
 exports.me = (req, res) => {
-  res.json({ id: req.user.id, name: req.user.name });
+  const { id, name, officeCode, schoolCode, schoolName } = req.user;
+  res.json({ id, name, officeCode, schoolCode, schoolName });
 };

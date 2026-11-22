@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="ko">
 <head>
@@ -69,6 +68,7 @@
                     <span><i class="blue"></i>학교 일정</span>
                     <span><i class="green"></i>수행평가</span>
                     <span><i class="purple"></i>개인 과제</span>
+                    <span><i class="gray"></i>기타</span>
                 </div>
 
                 <!-- 달력 -->
@@ -99,6 +99,35 @@
                     <button class="detail-add-button" id="detail-add-button">
                         ＋ 이 날짜에 일정 추가
                     </button>                    
+                </article>
+
+                <!-- 오늘 일정 완료율 -->
+                <article class="card progress-card">
+                    <div class="sidebar-title">
+                        <div>
+                            <p>PROGRESS</p>
+                            <h2 id="progress-title">오늘 일정 완료율</h2>
+                        </div>
+                        <span class="progress-percent" id="today-progress-percent">0%</span>
+                    </div>
+
+                    <div class="progress-bar">
+                        <div id="today-progress-bar"></div>
+                    </div>
+
+                    <p class="progress-info" id="today-progress-info">오늘 등록된 일정이 없습니다.</p>
+                </article>
+
+                <!-- 다가오는 일정 -->
+                <article class="card upcoming-card">
+                    <div class="sidebar-title">
+                        <div>
+                            <p>UPCOMING</p>
+                            <h2>다가오는 일정</h2>
+                        </div>
+                    </div>
+
+                    <!-- JavaScript에서 가장 가까운 날의 일정을 채웁니다 -->
                 </article>
 
             </aside>

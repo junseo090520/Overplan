@@ -5,6 +5,7 @@ const path = require("path");
 const cookieParser = require("cookie-parser");
 const authRoutes = require("./routes/authRoutes");
 const schoolRoutes = require("./routes/schoolRoutes");
+const eventRoutes = require("./routes/eventRoutes");
 
 // 프로젝트 최상위의 .env 불러오기
 dotenv.config({
@@ -25,6 +26,8 @@ app.use("/api/school", schoolRoutes);
 
 // 로그인
 app.use("/api/auth", authRoutes);
+
+app.use("/api/events", eventRoutes);     
 
 // 서버 실행
 app.listen(PORT, () => {

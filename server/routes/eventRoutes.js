@@ -8,8 +8,10 @@ const { requireAuth } = require("../middleware/authMiddleware");
 router.use(requireAuth);
 
 router.get("/", eventController.getEvents);
+router.get("/all", eventController.getAllEvents);
 router.get("/upcoming", eventController.getUpcoming);
 router.post("/", eventController.createEvent);
 router.patch("/:id/done", eventController.setDone);
+router.delete("/:id", eventController.deleteEvent);
 
 module.exports = router;

@@ -222,4 +222,46 @@ async function setDone(userId, id, done) {
     );
 }
 
-module.exports = { listEvents, listUpcoming, createEvent, setDone, EventError };
+const ALL_EVENTS_LIMIT = 500;
+
+// 일정 관리 페이지용: 내 모든 일정을 날짜순으로 (최대 500개)
+async function listAllEvents(userId) {
+    const [rows] = await pool.query(
+        `SELECT ${SELECT_COLUMNS}
+           FROM calendar_events
+          WHERE user_id = ?
+          ORDER BY start_at, id
+          LIMIT ${ALL_EVENTS_LIMIT}`,
+        [userId]
+    );
+
+    return rows.map(toClientEvent);
+}
+
+// 일정 삭제 (내 일정만 가능)
+async function deleteEvent(userId, id) {
+    const eventId = Number(id);
+
+    if (!Number.isInteger(eventId) || eventId <= 0) {
+        throw new EventError(400, "올바른 일정이 아닙니다.");
+    }
+
+    const [result] = await pool.query(
+        "DELETE FROM calendar_events WHERE id = ? AND user_id = ?",
+        [eventId, userId]
+    );
+
+    if (result.affectedRows === 0) {
+        throw new EventError(404, "일정을 찾을 수 없습니다.");
+    }
+}
+
+module.exports = {
+    listEvents,
+    listUpcoming,
+    listAllEvents,
+    createEvent,
+    setDone,
+    deleteEvent,
+    EventError
+};

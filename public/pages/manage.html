@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Overplan | 일정 관리</title>
+
+    <link rel="stylesheet" href="../css/common.css">
+    <link rel="stylesheet" href="../css/calendar.css">
+    <link rel="stylesheet" href="../css/manage.css">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+</head>
+
+<body>
+    <!-- 상단 네비게이션 -->
+    <header class="header">
+        <a href="home.html" class="logo">
+            <span>Overplan</span>
+        </a>
+
+        <nav class="nav">
+            <a href="home.html">⌂ 홈</a>
+            <a href="calendar.html">▦ 캘린더</a>
+            <a href="manage.html" class="active">☷ 일정 관리</a>
+            <a href="#">♙ 마이페이지</a>
+        </nav>
+
+        <div class="header-right">
+            <div class="search-box">
+                <span>⌕</span>
+                <input type="text" placeholder="일정, 과제, 키워드로 검색하세요...">
+            </div>
+        </div>
+    </header>
+
+    <main class="main-container">
+
+        <!-- 페이지 제목 -->
+        <section class="page-intro">
+            <div>
+                <p class="intro-label">SCHEDULE MANAGER</p>
+                <h1>일정 <span>관리</span></h1>
+                <p>등록한 일정을 날짜순으로 확인하고, 완료 처리하거나 삭제할 수 있어요.</p>
+            </div>
+
+        </section>
+
+        <!-- 일정 목록 -->
+        <article class="card manage-card">
+
+            <div class="manage-toolbar">
+                <div class="filter-group" role="group" aria-label="일정 필터">
+                    <button type="button" class="filter-button active" data-filter="all" aria-pressed="true">
+                        전체 <span data-count="all">0</span>
+                    </button>
+                    <button type="button" class="filter-button" data-filter="todo" aria-pressed="false">
+                        미완료 <span data-count="todo">0</span>
+                    </button>
+                    <button type="button" class="filter-button" data-filter="done" aria-pressed="false">
+                        완료 <span data-count="done">0</span>
+                    </button>
+                </div>
+            </div>
+
+            <div class="manage-list" id="manage-list">
+                <!-- JavaScript에서 날짜별로 일정을 그립니다 -->
+            </div>
+
+        </article>
+    </main>
+
+    <script src="../js/pages/manage.js"></script>
+</body>
+</html>

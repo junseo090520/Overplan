@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Overplan | 마이페이지</title>
+
+    <link rel="stylesheet" href="../css/common.css">
+    <link rel="stylesheet" href="../css/calendar.css">
+    <link rel="stylesheet" href="../css/mypage.css">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+</head>
+
+<body>
+    <!-- 상단 네비게이션 -->
+    <header class="header">
+        <a href="home.html" class="logo">
+            <span>Overplan</span>
+        </a>
+
+        <nav class="nav">
+            <a href="home.html">⌂ 홈</a>
+            <a href="calendar.html">▦ 캘린더</a>
+            <a href="manage.html">☷ 일정 관리</a>
+            <a href="mypage.html" class="active">♙ 마이페이지</a>
+        </nav>
+
+        <div class="header-right">
+            <div class="search-box">
+                <span>⌕</span>
+                <input type="text" placeholder="일정, 과제, 키워드로 검색하세요...">
+            </div>
+        </div>
+    </header>
+
+    <main class="main-container">
+
+        <!-- 페이지 제목 -->
+        <section class="page-intro">
+            <div>
+                <p class="intro-label">MY PAGE</p>
+                <h1>마이 <span>페이지</span></h1>
+                <p>내 학교를 확인하고 바꾸거나, 로그아웃과 회원 탈퇴를 할 수 있어요.</p>
+            </div>
+
+        </section>
+
+        <div class="mypage-layout">
+
+            <!-- 내 정보 / 학교 수정 -->
+            <article class="card mypage-card">
+                <div class="sidebar-title">
+                    <div>
+                        <p>PROFILE</p>
+                        <h2>내 정보</h2>
+                    </div>
+                </div>
+
+                <dl class="profile-list">
+                    <div class="profile-row">
+                        <dt>아이디</dt>
+                        <dd id="profile-name">-</dd>
+                    </div>
+                    <div class="profile-row">
+                        <dt>학교</dt>
+                        <dd id="profile-school">-</dd>
+                    </div>
+                </dl>
+
+                <p id="profile-message" class="form-message" role="alert"></p>
+
+                <button type="button" id="school-edit-button" class="secondary-button">학교 변경</button>
+
+                <!-- 학교 변경 영역 (학교 변경 버튼을 누르면 표시) -->
+                <div id="school-edit" class="school-edit" hidden>
+                    <label for="schoolKeyword">새 학교 검색</label>
+
+                    <div class="school-search">
+                        <input
+                            type="text"
+                            id="schoolKeyword"
+                            placeholder="학교 이름을 검색하세요"
+                            autocomplete="off"
+                        >
+                        <button type="button" id="schoolSearchButton" class="secondary-button">검색</button>
+                    </div>
+
+                    <ul id="schoolResults" class="school-results" hidden></ul>
+                    <p id="selectedSchool" class="selected-school" hidden></p>
+
+                    <p id="school-message" class="form-message" role="alert"></p>
+
+                    <div class="button-row">
+                        <button type="button" id="school-save-button" class="primary-button">저장</button>
+                        <button type="button" id="school-cancel-button" class="secondary-button">취소</button>
+                    </div>
+                </div>
+            </article>
+
+            <!-- 회원 탈퇴 -->
+            <article class="card mypage-card danger-card">
+                <div class="sidebar-title">
+                    <div>
+                        <p>DANGER ZONE</p>
+                        <h2>회원 탈퇴</h2>
+                    </div>
+                </div>
+
+                <p class="danger-desc">
+                    탈퇴하면 계정과 지금까지 등록한 모든 일정이 삭제되고, 되돌릴 수 없어요.
+                </p>
+
+                <button type="button" id="withdraw-open-button" class="danger-button">회원 탈퇴</button>
+
+                <form id="withdraw-form" class="withdraw-form" hidden novalidate>
+                    <label for="withdrawPassword">비밀번호 확인</label>
+                    <input
+                        type="password"
+                        id="withdrawPassword"
+                        placeholder="현재 비밀번호를 입력하세요"
+                        autocomplete="current-password"
+                    >
+
+                    <p id="withdraw-message" class="form-message" role="alert"></p>
+
+                    <div class="button-row">
+                        <button type="submit" id="withdraw-submit-button" class="danger-button solid">탈퇴하기</button>
+                        <button type="button" id="withdraw-cancel-button" class="secondary-button">취소</button>
+                    </div>
+                </form>
+            </article>
+
+            <button type="button" id="logout-button" class="secondary-button">로그아웃</button>
+        </div>
+    </main>
+
+    <script type="module" src="../js/pages/mypage.js"></script>
+</body>
+</html>

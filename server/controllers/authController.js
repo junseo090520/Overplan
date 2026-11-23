@@ -43,3 +43,28 @@ exports.me = (req, res) => {
   const { id, name, officeCode, schoolCode, schoolName } = req.user;
   res.json({ id, name, officeCode, schoolCode, schoolName });
 };
+
+// PATCH /api/auth/school  body: { officeCode, schoolCode, schoolName }
+exports.changeSchool = async (req, res) => {
+  try {
+    const { token, schoolName } = await authService.changeSchool(req.user.id, req.body);
+
+    // 학사일정이 새 학교 기준으로 조회되도록 토큰을 새로 발급
+    res.cookie("token", token, COOKIE_OPTIONS);
+    res.json({ message: "학교가 변경되었습니다.", schoolName });
+  } catch (err) {
+    handleError(res, err);
+  }
+};
+
+// DELETE /api/auth/me  body: { password }
+exports.withdraw = async (req, res) => {
+  try {
+    await authService.withdraw(req.user.id, req.body.password);
+
+    res.clearCookie("token");
+    res.json({ message: "회원 탈퇴가 완료되었습니다." });
+  } catch (err) {
+    handleError(res, err);
+  }
+};

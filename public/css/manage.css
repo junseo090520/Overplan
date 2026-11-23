@@ -1,0 +1,261 @@
+/* =========================
+   일정 관리 페이지
+========================= */
+
+/* 페이지 제목 옆 버튼 (a 태그로 쓰는 primary-button) */
+.link-button {
+    display: inline-block;
+    white-space: nowrap;
+}
+
+.manage-card {
+    padding: 25px;
+}
+
+/* =========================
+   필터
+========================= */
+
+.manage-toolbar {
+    margin-bottom: 22px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 15px;
+}
+
+.filter-group {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+}
+
+.filter-button {
+    height: 38px;
+    padding: 0 14px;
+    display: flex;
+    align-items: center;
+    gap: 7px;
+    border: 1px solid #e8edf4;
+    border-radius: 10px;
+    background: #f8f9fc;
+    color: #435675;
+    font-size: 13px;
+    font-weight: 600;
+}
+
+.filter-button span {
+    min-width: 20px;
+    padding: 1px 6px;
+    border-radius: 10px;
+    background: #e9eef6;
+    color: #687995;
+    font-size: 11px;
+    text-align: center;
+}
+
+.filter-button.active {
+    border-color: var(--primary);
+    background: var(--primary);
+    color: white;
+}
+
+.filter-button.active span {
+    background: rgba(255, 255, 255, .25);
+    color: white;
+}
+
+/* =========================
+   날짜별 그룹
+========================= */
+
+.manage-group + .manage-group {
+    margin-top: 22px;
+}
+
+.manage-date {
+    margin: 0 0 10px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    color: var(--navy);
+    font-size: 14px;
+    font-weight: 700;
+}
+
+.manage-group.past .manage-date {
+    color: #8a98ae;
+}
+
+.today-badge {
+    padding: 2px 8px;
+    border-radius: 8px;
+    background: #edf4ff;
+    color: var(--primary);
+    font-size: 11px;
+    font-weight: 700;
+}
+
+.manage-items {
+    overflow: hidden;
+    border: 1px solid var(--border);
+    border-radius: 12px;
+}
+
+/* =========================
+   일정 한 줄
+========================= */
+
+.manage-item {
+    padding: 14px 16px;
+    display: grid;
+    grid-template-columns: 20px minmax(0, 1fr) auto auto;
+    align-items: start;
+    gap: 14px;
+    background: white;
+}
+
+.manage-item + .manage-item {
+    border-top: 1px solid var(--border);
+}
+
+.manage-check {
+    width: 16px;
+    height: 16px;
+    margin: 3px 0 0;
+    accent-color: var(--primary);
+    cursor: pointer;
+}
+
+.manage-main {
+    min-width: 0;
+}
+
+.manage-title-row {
+    min-width: 0;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.manage-title-row h3 {
+    margin: 0;
+    overflow: hidden;
+    font-size: 14px;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.manage-desc {
+    margin: 7px 0 0;
+    color: #6f7f9b;
+    font-size: 12px;
+    line-height: 1.6;
+    white-space: pre-wrap;
+    word-break: break-word;
+}
+
+.manage-time {
+    padding-top: 2px;
+    color: #7c8ba5;
+    font-size: 12px;
+    white-space: nowrap;
+}
+
+/* 일정 종류 표시 */
+.type-chip {
+    flex-shrink: 0;
+    padding: 3px 8px;
+    border-radius: 6px;
+    font-size: 10px;
+    font-weight: 700;
+}
+
+.type-chip.pink {
+    background: #fff0f2;
+    color: #ed6479;
+}
+
+.type-chip.blue {
+    background: #edf4ff;
+    color: #347cf5;
+}
+
+.type-chip.green {
+    background: #e9f8f1;
+    color: #20a66b;
+}
+
+.type-chip.purple {
+    background: #f4edff;
+    color: #9256dc;
+}
+
+.type-chip.gray {
+    background: #f1f3f7;
+    color: #6b7a96;
+}
+
+/* 삭제 버튼 */
+.delete-button {
+    height: 30px;
+    padding: 0 11px;
+    border: 1px solid #ffd5db;
+    border-radius: 8px;
+    background: #fff6f7;
+    color: #ed6479;
+    font-size: 12px;
+    font-weight: 600;
+}
+
+.delete-button:hover {
+    background: #ffeaed;
+}
+
+.delete-button:disabled {
+    opacity: .6;
+    cursor: not-allowed;
+}
+
+/* 완료된 일정: 줄 긋고 흐리게 */
+.manage-item.done .manage-title-row h3 {
+    color: #a1adc1;
+    text-decoration: line-through;
+}
+
+.manage-item.done .manage-desc,
+.manage-item.done .manage-time {
+    color: #b6c0d0;
+}
+
+.manage-item.done .type-chip {
+    opacity: .6;
+}
+
+/* =========================
+   반응형
+========================= */
+
+@media (max-width: 760px) {
+    .manage-card {
+        padding: 15px 12px;
+    }
+
+    .manage-item {
+        padding: 12px;
+        grid-template-columns: 20px minmax(0, 1fr) auto;
+        gap: 8px 10px;
+    }
+
+    /* 시간은 제목 아래 줄로 */
+    .manage-time {
+        padding-top: 0;
+        grid-column: 2;
+        grid-row: 2;
+    }
+
+    .delete-button {
+        grid-column: 3;
+        grid-row: 1;
+    }
+}

@@ -22,6 +22,16 @@ exports.getEvents = async (req, res) => {
     }
 };
 
+// GET /api/events/all  (일정 관리 페이지: 내 모든 일정, 날짜순)
+exports.getAllEvents = async (req, res) => {
+    try {
+        const events = await eventService.listAllEvents(req.user.id);
+        res.json({ success: true, events });
+    } catch (err) {
+        handleError(res, err);
+    }
+};
+
 // GET /api/events/upcoming?after=2026-11-22
 exports.getUpcoming = async (req, res) => {
     try {
@@ -46,6 +56,16 @@ exports.createEvent = async (req, res) => {
 exports.setDone = async (req, res) => {
     try {
         await eventService.setDone(req.user.id, req.params.id, req.body.done);
+        res.json({ success: true });
+    } catch (err) {
+        handleError(res, err);
+    }
+};
+
+// DELETE /api/events/:id
+exports.deleteEvent = async (req, res) => {
+    try {
+        await eventService.deleteEvent(req.user.id, req.params.id);
         res.json({ success: true });
     } catch (err) {
         handleError(res, err);

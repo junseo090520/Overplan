@@ -29,6 +29,7 @@ const DATE_RULE = /^\d{4}-\d{2}-\d{2}$/;
 const TIME_RULE = /^([01]\d|2[0-3]):[0-5]\d$/;
 const MAX_RANGE_DAYS = 90;
 const UPCOMING_LIMIT = 10;
+const ALL_EVENTS_LIMIT = 500;
 const MAX_DESCRIPTION_LENGTH = 500;
 
 // 일정 조회에 공통으로 쓰는 컬럼 (날짜/시간은 문자열로 바로 만들어서 시간대 문제를 피함)
@@ -66,6 +67,70 @@ function parseDate(value) {
     return valid ? date : null;
 }
 
+// URL로 받은 일정 id 확인
+function parseId(id) {
+    const eventId = Number(id);
+
+    if (!Number.isInteger(eventId) || eventId <= 0) {
+        throw new EventError(400, "올바른 일정이 아닙니다.");
+    }
+    return eventId;
+}
+
+// 일정 추가/수정에서 공통으로 쓰는 입력 검증 (통과하면 정리된 값을 돌려줌)
+function validateEventInput({ title, type, description, date, time, endTime }) {
+    const cleanTitle = typeof title === "string" ? title.trim() : "";
+
+    if (cleanTitle.length === 0 || cleanTitle.length > 100) {
+        throw new EventError(400, "일정 이름은 1~100자로 입력해주세요.");
+    }
+
+    const mapped = TYPE_TO_DB[type];
+    if (!mapped) {
+        throw new EventError(400, "올바른 일정 종류가 아닙니다.");
+    }
+
+    const cleanDescription = typeof description === "string" ? description.trim() : "";
+    if (cleanDescription.length > MAX_DESCRIPTION_LENGTH) {
+        throw new EventError(400, `세부내용은 ${MAX_DESCRIPTION_LENGTH}자 이내로 입력해주세요.`);
+    }
+
+    if (!parseDate(date)) {
+        throw new EventError(400, "날짜가 올바르지 않습니다.");
+    }
+
+    if (typeof time !== "string" || !TIME_RULE.test(time)) {
+        throw new EventError(400, "시간은 09:00 형식으로 입력해주세요.");
+    }
+
+    // 종료 시간은 없어도 되고, 있으면 시작 시간보다 늦어야 함 (같은 날 기준)
+    let endAt = null;
+    let cleanEndTime = null;
+
+    if (endTime !== undefined && endTime !== null && endTime !== "") {
+        if (typeof endTime !== "string" || !TIME_RULE.test(endTime)) {
+            throw new EventError(400, "종료 시간은 10:30 형식으로 입력해주세요.");
+        }
+        if (endTime <= time) {
+            throw new EventError(400, "종료 시간은 시작 시간보다 늦어야 합니다.");
+        }
+        cleanEndTime = endTime;
+        endAt = `${date} ${endTime}:00`;
+    }
+
+    return {
+        title: cleanTitle,
+        type,
+        mapped,
+        description: cleanDescription,
+        date,
+        time,
+        endTime: cleanEndTime,
+        startAt: `${date} ${time}:00`,
+        endAt
+    };
+}
+
 // 기간(from ~ to, 날짜 포함) 안의 내 일정 조회
 async function listEvents(userId, from, to) {
     const fromDate = parseDate(from);
@@ -88,6 +153,20 @@ async function listEvents(userId, from, to) {
             AND start_at < DATE_ADD(?, INTERVAL 1 DAY)
           ORDER BY start_at, id`,
         [userId, `${from} 00:00:00`, `${to} 00:00:00`]
+    );
+
+    return rows.map(toClientEvent);
+}
+
+// 일정 관리 페이지용: 내 모든 일정을 날짜순으로 (최대 500개)
+async function listAllEvents(userId) {
+    const [rows] = await pool.query(
+        `SELECT ${SELECT_COLUMNS}
+           FROM calendar_events
+          WHERE user_id = ?
+          ORDER BY start_at, id
+          LIMIT ${ALL_EVENTS_LIMIT}`,
+        [userId]
     );
 
     return rows.map(toClientEvent);
@@ -129,46 +208,9 @@ async function listUpcoming(userId, after) {
     return rows.map(toClientEvent);
 }
 
-// 일정 추가 (endTime, description은 선택)
-async function createEvent(userId, { title, type, description, date, time, endTime }) {
-    const cleanTitle = typeof title === "string" ? title.trim() : "";
-
-    if (cleanTitle.length === 0 || cleanTitle.length > 100) {
-        throw new EventError(400, "일정 이름은 1~100자로 입력해주세요.");
-    }
-
-    const mapped = TYPE_TO_DB[type];
-    if (!mapped) {
-        throw new EventError(400, "올바른 일정 종류가 아닙니다.");
-    }
-
-    const cleanDescription = typeof description === "string" ? description.trim() : "";
-    if (cleanDescription.length > MAX_DESCRIPTION_LENGTH) {
-        throw new EventError(400, `세부내용은 ${MAX_DESCRIPTION_LENGTH}자 이내로 입력해주세요.`);
-    }
-
-    if (!parseDate(date)) {
-        throw new EventError(400, "날짜가 올바르지 않습니다.");
-    }
-
-    if (typeof time !== "string" || !TIME_RULE.test(time)) {
-        throw new EventError(400, "시간은 09:00 형식으로 입력해주세요.");
-    }
-
-    // 종료 시간은 없어도 되고, 있으면 시작 시간보다 늦어야 함 (같은 날 기준)
-    let endAt = null;
-    let cleanEndTime = null;
-
-    if (endTime !== undefined && endTime !== null && endTime !== "") {
-        if (typeof endTime !== "string" || !TIME_RULE.test(endTime)) {
-            throw new EventError(400, "종료 시간은 10:30 형식으로 입력해주세요.");
-        }
-        if (endTime <= time) {
-            throw new EventError(400, "종료 시간은 시작 시간보다 늦어야 합니다.");
-        }
-        cleanEndTime = endTime;
-        endAt = `${date} ${endTime}:00`;
-    }
+// 일정 추가
+async function createEvent(userId, input) {
+    const event = validateEventInput(input);
 
     const [result] = await pool.query(
         `INSERT INTO calendar_events
@@ -176,34 +218,70 @@ async function createEvent(userId, { title, type, description, date, time, endTi
          VALUES (?, ?, ?, ?, ?, ?, ?)`,
         [
             userId,
-            cleanTitle,
-            mapped.eventType,
-            mapped.assessmentType,
-            cleanDescription || null,
-            `${date} ${time}:00`,
-            endAt
+            event.title,
+            event.mapped.eventType,
+            event.mapped.assessmentType,
+            event.description || null,
+            event.startAt,
+            event.endAt
         ]
     );
 
     return {
         id: result.insertId,
-        title: cleanTitle,
-        type,
-        date,
-        time,
-        endTime: cleanEndTime,
-        content: cleanDescription,
+        title: event.title,
+        type: event.type,
+        date: event.date,
+        time: event.time,
+        endTime: event.endTime,
+        content: event.description,
         isDone: false
     };
 }
 
+// 일정 수정 (내 일정만 가능, 완료 여부는 그대로 유지)
+async function updateEvent(userId, id, input) {
+    const eventId = parseId(id);
+    const event = validateEventInput(input);
+
+    const [rows] = await pool.query(
+        "SELECT id FROM calendar_events WHERE id = ? AND user_id = ?",
+        [eventId, userId]
+    );
+    if (rows.length === 0) {
+        throw new EventError(404, "일정을 찾을 수 없습니다.");
+    }
+
+    await pool.query(
+        `UPDATE calendar_events
+            SET title = ?, event_type = ?, assessment_type = ?,
+                description = ?, start_at = ?, end_at = ?
+          WHERE id = ? AND user_id = ?`,
+        [
+            event.title,
+            event.mapped.eventType,
+            event.mapped.assessmentType,
+            event.description || null,
+            event.startAt,
+            event.endAt,
+            eventId,
+            userId
+        ]
+    );
+
+    // 완료 여부(is_done)까지 포함한 최신 상태를 다시 읽어서 돌려줌
+    const [updated] = await pool.query(
+        `SELECT ${SELECT_COLUMNS} FROM calendar_events WHERE id = ? AND user_id = ?`,
+        [eventId, userId]
+    );
+
+    return toClientEvent(updated[0]);
+}
+
 // 완료 여부 변경 (내 일정만 가능)
 async function setDone(userId, id, done) {
-    const eventId = Number(id);
+    const eventId = parseId(id);
 
-    if (!Number.isInteger(eventId) || eventId <= 0) {
-        throw new EventError(400, "올바른 일정이 아닙니다.");
-    }
     if (typeof done !== "boolean") {
         throw new EventError(400, "완료 여부가 올바르지 않습니다.");
     }
@@ -222,29 +300,9 @@ async function setDone(userId, id, done) {
     );
 }
 
-const ALL_EVENTS_LIMIT = 500;
-
-// 일정 관리 페이지용: 내 모든 일정을 날짜순으로 (최대 500개)
-async function listAllEvents(userId) {
-    const [rows] = await pool.query(
-        `SELECT ${SELECT_COLUMNS}
-           FROM calendar_events
-          WHERE user_id = ?
-          ORDER BY start_at, id
-          LIMIT ${ALL_EVENTS_LIMIT}`,
-        [userId]
-    );
-
-    return rows.map(toClientEvent);
-}
-
 // 일정 삭제 (내 일정만 가능)
 async function deleteEvent(userId, id) {
-    const eventId = Number(id);
-
-    if (!Number.isInteger(eventId) || eventId <= 0) {
-        throw new EventError(400, "올바른 일정이 아닙니다.");
-    }
+    const eventId = parseId(id);
 
     const [result] = await pool.query(
         "DELETE FROM calendar_events WHERE id = ? AND user_id = ?",
@@ -261,6 +319,7 @@ module.exports = {
     listUpcoming,
     listAllEvents,
     createEvent,
+    updateEvent,
     setDone,
     deleteEvent,
     EventError

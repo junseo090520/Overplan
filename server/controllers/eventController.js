@@ -52,6 +52,16 @@ exports.createEvent = async (req, res) => {
     }
 };
 
+// PATCH /api/events/:id   body: { title, type, description, date, time, endTime }
+exports.updateEvent = async (req, res) => {
+    try {
+        const event = await eventService.updateEvent(req.user.id, req.params.id, req.body);
+        res.json({ success: true, event });
+    } catch (err) {
+        handleError(res, err);
+    }
+};
+
 // PATCH /api/events/:id/done   body: { done: true | false }
 exports.setDone = async (req, res) => {
     try {

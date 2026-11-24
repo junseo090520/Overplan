@@ -72,6 +72,58 @@
         </article>
     </main>
 
+    <!-- 일정 수정 팝업 -->
+    <dialog id="edit-dialog" class="edit-dialog" aria-labelledby="edit-heading">
+        <form id="edit-form" novalidate>
+            <h2 id="edit-heading">일정 수정</h2>
+
+            <div class="form-field">
+                <label for="edit-title">일정 이름</label>
+                <input type="text" id="edit-title" maxlength="100" autocomplete="off">
+            </div>
+
+            <div class="form-field">
+                <label for="edit-type">일정 종류</label>
+                <select id="edit-type">
+                    <option value="exam">시험</option>
+                    <option value="school">학교 일정</option>
+                    <option value="assessment">수행평가</option>
+                    <option value="assignment">개인 과제</option>
+                    <option value="other">기타</option>
+                </select>
+            </div>
+
+            <div class="form-field">
+                <label for="edit-date">날짜</label>
+                <input type="date" id="edit-date">
+            </div>
+
+            <div class="form-row">
+                <div class="form-field">
+                    <label for="edit-time">시작 시간</label>
+                    <input type="time" id="edit-time">
+                </div>
+
+                <div class="form-field">
+                    <label for="edit-end-time">종료 시간 (선택)</label>
+                    <input type="time" id="edit-end-time">
+                </div>
+            </div>
+
+            <div class="form-field">
+                <label for="edit-description">세부내용 (선택)</label>
+                <textarea id="edit-description" rows="4" maxlength="500"></textarea>
+            </div>
+
+            <p id="edit-message" class="form-message" role="alert"></p>
+
+            <div class="button-row">
+                <button type="submit" id="edit-save-button" class="primary-button">저장</button>
+                <button type="button" id="edit-cancel-button" class="secondary-button">취소</button>
+            </div>
+        </form>
+    </dialog>
+
     <script src="../js/pages/manage.js"></script>
 </body>
 </html>

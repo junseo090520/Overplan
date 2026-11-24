@@ -5,8 +5,22 @@
 const manageList = document.getElementById("manage-list");
 const filterButtons = document.querySelectorAll(".filter-button");
 
+// 수정 팝업
+const editDialog = document.getElementById("edit-dialog");
+const editForm = document.getElementById("edit-form");
+const editTitle = document.getElementById("edit-title");
+const editType = document.getElementById("edit-type");
+const editDate = document.getElementById("edit-date");
+const editTime = document.getElementById("edit-time");
+const editEndTime = document.getElementById("edit-end-time");
+const editDescription = document.getElementById("edit-description");
+const editMessage = document.getElementById("edit-message");
+const editSaveButton = document.getElementById("edit-save-button");
+const editCancelButton = document.getElementById("edit-cancel-button");
+
 const today = new Date();
 const WEEKDAYS = ["일", "월", "화", "수", "목", "금", "토"];
+const MAX_DESCRIPTION_LENGTH = 500;
 
 const eventTypes = {
     exam: { name: "시험", className: "pink" },
@@ -27,6 +41,9 @@ let allEvents = [];
 
 // 현재 선택된 필터: all | todo | done
 let currentFilter = "all";
+
+// 지금 수정 팝업에서 편집 중인 일정
+let editingEvent = null;
 
 /* =========================
    공통 함수
@@ -51,6 +68,15 @@ function formatDateLabel(dateKey) {
 
 function formatTimeRange(event) {
     return event.endTime ? `${event.time} ~ ${event.endTime}` : event.time;
+}
+
+// 날짜 → 시간 → id 순으로 정렬 (서버의 정렬 기준과 같음)
+function sortEvents() {
+    allEvents.sort((a, b) =>
+        a.date.localeCompare(b.date) ||
+        a.time.localeCompare(b.time) ||
+        a.id - b.id
+    );
 }
 
 // 서버 요청 공통 처리: 로그인이 풀렸으면 로그인 페이지로, 실패하면 에러를 던짐
@@ -149,7 +175,10 @@ function createItem(event) {
             </div>
         </div>
         <div class="manage-time"></div>
-        <button type="button" class="delete-button" aria-label="일정 삭제">삭제</button>
+        <div class="manage-actions">
+            <button type="button" class="edit-button" aria-label="일정 수정">수정</button>
+            <button type="button" class="delete-button" aria-label="일정 삭제">삭제</button>
+        </div>
     `;
 
     const title = item.querySelector("h3");
@@ -171,6 +200,10 @@ function createItem(event) {
     checkbox.checked = Boolean(event.isDone);
     checkbox.addEventListener("change", () => {
         toggleDone(event, checkbox.checked);
+    });
+
+    item.querySelector(".edit-button").addEventListener("click", () => {
+        openEditDialog(event);
     });
 
     const deleteButton = item.querySelector(".delete-button");
@@ -198,7 +231,7 @@ function renderList() {
         return;
     }
 
-    // 서버에서 이미 날짜순으로 정렬돼 있으므로 날짜가 바뀔 때마다 새 그룹을 만듦
+    // 날짜순으로 정렬돼 있으므로 날짜가 바뀔 때마다 새 그룹을 만듦
     let lastDate = null;
     let itemsBox = null;
 
@@ -281,6 +314,126 @@ async function deleteEvent(event, button) {
         alert(error.message);
     }
 }
+
+/* =========================
+   일정 수정 팝업
+========================= */
+
+function showEditMessage(text) {
+    editMessage.textContent = text;
+    editMessage.className = "form-message error";
+}
+
+function openEditDialog(event) {
+    editingEvent = event;
+
+    editTitle.value = event.title;
+    editType.value = event.type;
+    editDate.value = event.date;
+    editTime.value = event.time;
+    editEndTime.value = event.endTime || "";
+    editDescription.value = event.content || "";
+
+    showEditMessage("");
+    editSaveButton.disabled = false;
+
+    editDialog.showModal();
+    editTitle.focus();
+}
+
+function closeEditDialog() {
+    editDialog.close();
+    editingEvent = null;
+}
+
+editCancelButton.addEventListener("click", closeEditDialog);
+
+// 팝업 바깥(어두운 배경)을 누르면 닫기
+editDialog.addEventListener("click", (e) => {
+    if (e.target === editDialog) {
+        closeEditDialog();
+    }
+});
+
+editForm.addEventListener("submit", async (e) => {
+    e.preventDefault();
+
+    if (!editingEvent) {
+        return;
+    }
+
+    const title = editTitle.value.trim();
+    const type = editType.value;
+    const date = editDate.value;
+    const time = editTime.value;
+    const endTime = editEndTime.value;
+    const description = editDescription.value.trim();
+
+    if (!title) {
+        showEditMessage("일정 이름을 입력해주세요.");
+        return;
+    }
+
+    if (title.length > 100) {
+        showEditMessage("일정 이름은 100자 이내로 입력해주세요.");
+        return;
+    }
+
+    if (!date) {
+        showEditMessage("날짜를 선택해주세요.");
+        return;
+    }
+
+    if (!time) {
+        showEditMessage("시작 시간을 입력해주세요.");
+        return;
+    }
+
+    if (endTime && endTime <= time) {
+        showEditMessage("종료 시간은 시작 시간보다 늦어야 합니다.");
+        return;
+    }
+
+    if (description.length > MAX_DESCRIPTION_LENGTH) {
+        showEditMessage(`세부내용은 ${MAX_DESCRIPTION_LENGTH}자 이내로 입력해주세요.`);
+        return;
+    }
+
+    editSaveButton.disabled = true;
+    showEditMessage("");
+
+    try {
+        const data = await request(`/api/events/${editingEvent.id}`, {
+            method: "PATCH",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({
+                title,
+                type,
+                description,
+                date,
+                time,
+                endTime: endTime || null
+            })
+        });
+
+        // 서버가 돌려준 최신 일정으로 바꾸고, 날짜가 바뀌었을 수 있으니 다시 정렬
+        const index = allEvents.findIndex(item => item.id === editingEvent.id);
+
+        if (index !== -1) {
+            allEvents[index] = data.event;
+        }
+
+        sortEvents();
+        renderList();
+        closeEditDialog();
+
+    } catch (error) {
+        console.error("일정 수정 오류:", error);
+
+        showEditMessage(error.message);
+        editSaveButton.disabled = false;
+    }
+});
 
 /* =========================
    필터 버튼

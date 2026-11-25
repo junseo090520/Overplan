@@ -5,7 +5,7 @@ const message = document.getElementById("message");
 const submitButton = document.getElementById("submitButton");
 
 // 로그인 성공 후 이동할 페이지
-const REDIRECT_URL = "/pages/home.html";
+const REDIRECT_URL = "/pages/calendar.html";
 
 function showMessage(text, type = "error") {
     message.textContent = text;
